@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -21,6 +22,7 @@ export default function RootLayout({
         <main className="min-h-screen flex flex-col items-center">
           {children}
         </main>
+        <Toaster />
       </body>
     </html>
   );
