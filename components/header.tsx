@@ -1,5 +1,8 @@
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+
+import { AuthButton } from "@/components/buttons/auth-button";
+import { ThemeButton } from "@/components/buttons/theme-button";
+import { Button } from "@/components/ui/button";
 
 export const Header = () => {
   return (
@@ -8,13 +11,10 @@ export const Header = () => {
         <Button asChild variant="ghost" className="text-xl font-bold">
           <Link href="/">cineMEmento</Link>
         </Button>
-        {/* <div className="gap-2 hidden md:flex">
+        <div className="gap-2 hidden md:flex">
           <AuthButton />
-          <ThemeSwitcher />
+          <ThemeButton />
         </div>
-        <div className="block md:hidden">
-          <HamburgerMenu />
-        </div> */}
       </div>
     </header>
   );

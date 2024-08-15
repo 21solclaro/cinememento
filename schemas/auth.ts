@@ -1,12 +1,14 @@
 import { z } from "zod";
 
+const password = z.string().min(6, "8文字以上で入力して下さい");
+const username = z.string().min(3, "3文字以上で入力して下さい");
+
 export const loginSchema = z.object({
-  username: z.string().min(1, "1文字以上で入力して下さい"),
-  password: z.string().min(8, "6文字以上で入力して下さい"),
+  email: z.string().email(),
+  password: password,
 });
 
 export const signupSchema = z.object({
-  username: z.string().min(1, "1文字以上で入力して下さい"),
   email: z.string().email(),
-  password: z.string().min(8, "8文字以上で入力して下さい"),
+  password: password,
 });

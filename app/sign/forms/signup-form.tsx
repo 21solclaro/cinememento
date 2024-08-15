@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { signupSchema } from "@/schemas/auth";
 import { signUp } from "@/actions/auth";
+import Link from "next/link";
 
 type FormData = z.infer<typeof signupSchema>;
 
@@ -28,7 +29,7 @@ export const SignupForm = () => {
 
   const onSubmit = (data: FormData) => {
     try {
-      signUp(data.username, data.password);
+      signUp(data.email, data.password);
     } catch (error) {
       toast({ title: "Error" });
     }
@@ -36,20 +37,20 @@ export const SignupForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        {/* <FormField
           control={form.control}
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>ユーザ名</FormLabel>
+              <FormLabel>ユーザー名</FormLabel>
               <FormControl>
-                <Input autoComplete="off" placeholder="John" {...field} />
+                <Input autoComplete="off" placeholder="@johndoe" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         <FormField
           control={form.control}
           name="email"
@@ -80,7 +81,12 @@ export const SignupForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">ログイン</Button>
+        <Button className="w-full" type="submit">
+          新規登録
+        </Button>
+        <Button className="w-full" type="submit" variant="outline" asChild>
+          <Link href="/">キャンセル</Link>
+        </Button>
       </form>
     </Form>
   );
