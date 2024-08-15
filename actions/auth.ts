@@ -13,7 +13,7 @@ export const signIn = async (email: string, password: string) => {
   });
 
   if (error) {
-    return redirect("/login?message=Could not authenticate user");
+    return redirect("/auth/login?message=Could not authenticate user");
   }
 
   return redirect("/");
@@ -32,10 +32,12 @@ export const signUp = async (email: string, password: string) => {
   });
 
   if (error) {
-    return redirect("/login?message=Could not authenticate user");
+    return redirect("/auth/login?message=Could not authenticate user");
   }
 
-  return redirect("/login?message=Check email to continue sign in process");
+  return redirect(
+    "/auth/login?message=Check email to continue sign in process"
+  );
 };
 
 export const signOut = async () => {
@@ -46,5 +48,5 @@ export const signOut = async () => {
     throw new Error(error.message);
   }
 
-  return redirect("/login");
+  return redirect("/auth/login");
 };

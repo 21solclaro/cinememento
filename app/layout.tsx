@@ -1,5 +1,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -18,10 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className="bg-background text-foreground">
-        <main className="min-h-screen flex flex-col items-center">
-          {children}
-        </main>
+      <body className="min-h-dvh">
+        <Header />
+        <main>{children}</main>
+        <Footer />
         <Toaster />
       </body>
     </html>
