@@ -1,6 +1,5 @@
 "use server";
 
-import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -17,7 +16,7 @@ export const signIn = async (email: string, password: string) => {
     throw new Error(error.message);
   }
 
-  return redirect("/");
+  redirect("/");
 };
 
 export const signUp = async (email: string, password: string) => {
@@ -43,7 +42,7 @@ export const signUp = async (email: string, password: string) => {
   //     .insert([{ id: user.id, username, email }]);
   // }
 
-  return redirect("/");
+  redirect("/");
 };
 
 export const signOut = async () => {
@@ -54,5 +53,5 @@ export const signOut = async () => {
     throw new Error(error.message);
   }
 
-  return redirect("/");
+  redirect("/");
 };

@@ -1,5 +1,6 @@
 import { getUser } from "@/app/data/auth";
 import { getMovies } from "@/app/data/movie";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function Page() {
@@ -25,8 +26,10 @@ export default async function Page() {
                   <div className="aspect-[2/3] min-w-16 bg-slate-400 rounded-md"></div>
                   <div className="flex flex-col">
                     <h2 className="text-md font-semibold truncate">
-                      {movie.title}
-                      <span className="absolute inset-0"></span>
+                      <Link href={`/movies/${movie.id}`}>
+                        {movie.title}
+                        <span className="absolute inset-0"></span>
+                      </Link>
                     </h2>
                     <h3 className="text-sm text-muted-foreground">
                       {movie.view_date}

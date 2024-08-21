@@ -1,6 +1,7 @@
 import { getUser } from "@/app/data/auth";
+import { getMovies } from "@/app/data/movie";
 import { redirect } from "next/navigation";
-import { UsernameForm } from "./username-form";
+import { MovieForm } from "@/app//movies/movie-form";
 
 export default async function Page() {
   const user = await getUser();
@@ -9,9 +10,11 @@ export default async function Page() {
     redirect("/sign");
   }
 
+  const movies = await getMovies();
+
   return (
-    <div className="p-10 max-w-[400px]">
-      <UsernameForm />
+    <div className="p-10 mx-auto max-w-[800px]">
+      <MovieForm />
     </div>
   );
 }

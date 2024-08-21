@@ -15,3 +15,19 @@ export const getMovies = async () => {
 
   return data;
 };
+
+export const getMovie = async (id: string) => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from("movies")
+    .select()
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  return data;
+};
