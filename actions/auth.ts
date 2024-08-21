@@ -1,5 +1,6 @@
 "use server";
 
+import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -23,7 +24,10 @@ export const signUp = async (email: string, password: string) => {
   const origin = headers().get("origin");
   const supabase = createClient();
 
-  const { error } = await supabase.auth.signUp({
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.signUp({
     email,
     password,
     options: {
@@ -31,9 +35,13 @@ export const signUp = async (email: string, password: string) => {
     },
   });
 
-  if (error) {
-    console.log(error);
-  }
+  // if (!error && user) {
+  //   const supabaseAdmin = createAdminClient();
+
+  //   const { error } = await supabaseAdmin
+  //     .from("username")
+  //     .insert([{ id: user.id, username, email }]);
+  // }
 
   return redirect("/");
 };

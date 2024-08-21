@@ -75,7 +75,7 @@ export const LoginForm = () => {
                     variant="ghost"
                     onClick={() => setPasswordVisible((v) => !v)}
                   >
-                    {passwordVisible ? <EyeOff size={16} /> : <Eye size={16} />}
+                    {passwordVisible ? <Eye size={16} /> : <EyeOff size={16} />}
                   </Button>
                 </div>
               </FormControl>

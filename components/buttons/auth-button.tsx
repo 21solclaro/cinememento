@@ -31,7 +31,7 @@ export const AuthButton = async () => {
           <Link href={"/mypage"}>マイページ</Link>
         </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer" asChild>
-          <Link href={"/setting"}>設定</Link>
+          <Link href={"/settings"}>設定</Link>
         </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer" asChild>
           <form action={signOut}>

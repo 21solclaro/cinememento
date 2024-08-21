@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { AuthButton } from "@/components/buttons/auth-button";
-import { ThemeButton } from "@/components/buttons/theme-button";
 import { Button } from "@/components/ui/button";
 
 export const Header = () => {
@@ -13,7 +12,6 @@ export const Header = () => {
         </Button>
         <div className="gap-2 hidden md:flex">
           <AuthButton />
-          <ThemeButton />
         </div>
       </div>
     </header>
