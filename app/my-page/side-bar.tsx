@@ -4,30 +4,17 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { MovieForm } from "@/app/movies/movie-form";
+import { signOut } from "@/actions/auth";
 
 export const SideBar = () => {
   const pathname = usePathname();
   const items = [
-    { title: "映画一覧", href: "/movies" },
-    { title: "設定", href: "/settings" },
     { title: "マイページ", href: "/mypage" },
+    { title: "設定", href: "/mypage/settings" },
   ];
 
   return (
-    <nav className="flex flex-col space-y-2">
-      <Button asChild>
-        <Link href="/movies/post">新規投稿</Link>
-      </Button>
+    <nav className="flex flex-col space-y-1">
       {items.map((item) => (
         <Button
           variant="ghost"

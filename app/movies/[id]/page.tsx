@@ -1,10 +1,14 @@
 import { getUser } from "@/app/data/auth";
-import { getMovie, getMovies } from "@/app/data/movie";
-import { redirect, usePathname } from "next/navigation";
-import { error } from "console";
+import { redirect } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
-import { DeleteButton } from "./delete-button";
+import { getCasts, getMovie } from "@/app/data/movie";
+import { ChevronLeft, Plus } from "lucide-react";
+import { getPostsByMovie } from "@/app/data/post";
+import { Cast, Movie } from "@/types/movie";
+import { Post } from "@/types/post";
+import { MoviePosts } from "./components/posts";
+import { MovieDetail } from "./components/movie-detail";
+import { LinkButton } from "@/components/buttons/link-button";
 
 export default async function Page({
   params: { id },
@@ -13,39 +17,35 @@ export default async function Page({
     id: string;
   };
 }) {
-  const user = await getUser();
-
-  if (!user) {
-    redirect("/sign");
-  }
-  const movie = await getMovie(id);
+  const movie: Movie = await getMovie(id);
 
   if (!movie) {
-    console.log(error);
+    console.error("映画が見つかりません");
+    redirect("/movies");
   }
 
+  const casts: Cast[] = await getCasts(id);
+
+  const user = await getUser();
+
+  const posts: Post[] | null =
+    user && (await getPostsByMovie(movie.id, user.id));
+
   return (
-    <main className="max-w-[800px] px-10 py-20 mx-auto">
-      <div className="flex flex-col md:flex-row gap-4 md:justify-between md:items-start items-center justify-center">
-        <div className="aspect-[2/3] min-w-40 bg-slate-400 rounded-md"></div>
-        <div className="md:items-end">
-          <h2 className="font-bold text-2xl">{movie.title}</h2>
-          <h3 className="text-muted-foreground text-center md:text-end">
-            {movie.view_date}
-          </h3>
-        </div>
-      </div>
-      <div className="space-x-2 pt-4">
-        <Badge>SF</Badge>
-        <Badge>Action</Badge>
-      </div>
-      <Separator className="my-6" />
-      {movie.memo && (
-        <div className="hover:shadow-lg transition duration-500 relative p-4 border rounded-lg shadow-sm bg-card hover:bg-card/10 space-y-1">
-          {movie.memo}
-        </div>
+    <main className="md:w-[800px] p-10 mx-auto">
+      <LinkButton href={"/movies"} icon={<ChevronLeft size={20} />}>
+        映画一覧へ戻る
+      </LinkButton>
+      <MovieDetail movie={movie} casts={casts} />
+      <Separator />
+      {user && (
+        <>
+          {posts && posts.length > 0 && <MoviePosts posts={posts} />}
+          <LinkButton href={`${id}/post`} icon={<Plus size={20} />}>
+            投稿する
+          </LinkButton>
+        </>
       )}
-      <DeleteButton id={movie.id} />
     </main>
   );
 }

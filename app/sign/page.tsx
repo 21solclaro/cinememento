@@ -4,8 +4,8 @@ import { SignupForm } from "./forms/signup-form";
 
 export default function Page() {
   return (
-    <div className="py-10 px-6 md:px-0 mx-auto max-w-[400px]">
-      <Tabs defaultValue="login" className="max-w-[400px]">
+    <div className="w-full md:w-[400px] p-6 md:px-0 mx-auto">
+      <Tabs defaultValue="login">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="login">ログイン</TabsTrigger>
           <TabsTrigger value="signup">新規登録</TabsTrigger>

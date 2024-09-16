@@ -14,8 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
-import Link from "next/link";
+import { useToast } from "@/hooks/use-toast";
 import { usernameSchema } from "@/schemas/auth";
 
 type FormData = z.infer<typeof usernameSchema>;
@@ -50,12 +49,7 @@ export const UsernameForm = () => {
             </FormItem>
           )}
         />
-        <Button className="w-full" type="submit">
-          保存
-        </Button>
-        <Button className="w-full" type="submit" variant="outline" asChild>
-          <Link href="/">キャンセル</Link>
-        </Button>
+        <Button type="submit">保存</Button>
       </form>
     </Form>
   );

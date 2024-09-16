@@ -4,7 +4,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
-import { SideBar } from "@/components/side-bar";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -15,11 +14,9 @@ export const metadata = {
   title: "cineMemento",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+type RootLayoutProps = { children: React.ReactNode };
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="ja">
       <body className="min-h-dvh bg-muted/30 flex flex-col">
@@ -30,12 +27,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <div className="flex flex-1">
-            <aside className="px-6 py-10 hidden md:block md:w-72">
-              <SideBar />
-            </aside>
-            <main className="flex-1">{children}</main>
-          </div>
+          {children}
           <Toaster />
           <Footer />
         </ThemeProvider>

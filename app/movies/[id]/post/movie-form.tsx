@@ -21,13 +21,12 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
-import Link from "next/link";
+import { useToast } from "@/hooks/use-toast";
 import { movieSchema } from "@/schemas/movie";
-import { createMovie } from "@/actions/movie";
+import { createPost } from "@/actions/post";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
-import { redirect } from "next/navigation";
+import { Textarea } from "@/components/ui/textarea";
 
 type FormData = z.infer<typeof movieSchema>;
 
@@ -39,7 +38,7 @@ export const MovieForm = () => {
 
   const onSubmit = (data: FormData) => {
     try {
-      createMovie(data);
+      createPost(data);
     } catch (error) {
       toast({ title: "Error" });
     }
@@ -47,7 +46,7 @@ export const MovieForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="py-4 space-y-4">
         <FormField
           control={form.control}
           name="title"
@@ -56,6 +55,7 @@ export const MovieForm = () => {
               <FormLabel>タイトル</FormLabel>
               <FormControl>
                 <Input
+                  defaultValue={"あいうえお"}
                   autoComplete="off"
                   placeholder="ジュラシックパーク"
                   {...field}
@@ -82,9 +82,9 @@ export const MovieForm = () => {
                       )}
                     >
                       {field.value ? (
-                        format(field.value, "PPP")
+                        format(field.value, "yyyy年M月d日")
                       ) : (
-                        <span>Pick a date</span>
+                        <span>{format(new Date(), "yyyy年M月d日")}</span>
                       )}
                       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
@@ -108,23 +108,36 @@ export const MovieForm = () => {
         />
         <FormField
           control={form.control}
-          name="memo"
+          name="view_method"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>メモ</FormLabel>
+              <FormLabel>鑑賞方法</FormLabel>
               <FormControl>
-                <Input autoComplete="off" placeholder="" {...field} />
+                <Input autoComplete="off" placeholder="映画館" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button className="w-full" type="submit">
-          投稿
-        </Button>
-        <Button className="w-full" type="submit" variant="outline" asChild>
-          <Link href="/">リセット</Link>
-        </Button>
+        <FormField
+          control={form.control}
+          name="comment"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>コメント</FormLabel>
+              <FormControl>
+                <Textarea
+                  autoComplete="off"
+                  placeholder=""
+                  className="resize-none"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">投稿</Button>
       </form>
     </Form>
   );
