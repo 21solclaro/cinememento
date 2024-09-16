@@ -1,6 +1,6 @@
 import "@/app/globals.css";
 
-import { NavBar } from "../../components/nav-bar";
+import { NavBar } from "@/components/nav-bar";
 import { Metadata } from "next";
 import { Contact, FileQuestion, Info, Notebook } from "lucide-react";
 
@@ -15,27 +15,27 @@ export const metadata: Metadata = {
 
 const navItems = [
   {
-    href: "/info/about",
+    href: "/about",
     icon: <Info />,
     title: "cineMEmentoについて",
   },
   {
-    href: "/info/contact",
+    href: "/contact",
     icon: <Contact />,
     title: "コンタクト",
   },
   {
-    href: "/info/faq",
+    href: "/faq",
     icon: <FileQuestion />,
     title: "Q & A",
   },
   {
-    href: "/info/privacy",
+    href: "/privacy",
     icon: <Notebook />,
     title: "プライバシーポリシー",
   },
   {
-    href: "/info/terms",
+    href: "/terms",
     icon: <Notebook />,
     title: "利用規約",
   },
