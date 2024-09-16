@@ -4,12 +4,11 @@ import { z } from "zod";
 import { getUser } from "@/app/data/auth";
 import { createClient } from "@/lib/supabase/server";
 import { movieSchema } from "@/schemas/movie";
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 type FormData = z.infer<typeof movieSchema>;
 
-export const createMovie = async (formData: FormData) => {
+export const createPost = async (formData: FormData) => {
   const supabase = createClient();
   const user = await getUser();
 
@@ -26,7 +25,7 @@ export const createMovie = async (formData: FormData) => {
   redirect("/movies");
 };
 
-export const updateMovie = async (id: string, formData: FormData) => {
+export const updatePost = async (id: string, formData: FormData) => {
   const supabase = createClient();
   const user = await getUser();
 
@@ -43,7 +42,7 @@ export const updateMovie = async (id: string, formData: FormData) => {
   redirect("/movies");
 };
 
-export const deleteMovie = async (id: string) => {
+export const deletePost = async (id: string) => {
   const supabase = createClient();
   const user = await getUser();
 
